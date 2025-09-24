@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video Player with Watermark</title>
+    <script type="module" src="https://cdn.jsdelivr.net/npm/videojs-video-element/+esm"></script>
+    <script type="module" src="https://cdn.jsdelivr.net/npm/player.style/yt/+esm"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #3b82f6;
+            --secondary-color: #2563eb;
+            --player-bg: #ffffff;
+            --border-radius: 10px;
+            --box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background-color: #1a1a1a;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        
+        .video-player-container {
+            background: var(--player-bg);
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            overflow: hidden;
+            width: 100%;
+            max-width: 900px;
+            /* Aspect ratio: 16:9 */
+            position: relative;
+            height: 0;
+            padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+        }
+        
+        media-theme-yt {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            --media-primary-color: var(--primary-color);
+            --media-secondary-color: var(--secondary-color);
+        }
+        
+        /* Watermark styling - smaller and clearer */
+        .watermark {
+            position: absolute;
+            top: 12px;
+            left: 12px;
+            color: rgba(255, 255, 255, 0.85);
+            font-size: 14px;
+            font-weight: 500;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+            z-index: 10;
+            pointer-events: none;
+            padding: 4px 8px;
+            background: rgba(0, 0, 0, 0.4);
+            border-radius: 3px;
+            font-family: 'Inter', Arial, sans-serif;
+            letter-spacing: 0.5px;
+        }
+        
+        /* Hide all text elements */
+        .player-header, .player-footer, .video-meta, 
+        .video-stats, .video-actions, .video-description,
+        .subtitle-controls, .subtitle-header, .subtitle-options {
+            display: none !important;
+        }
+
+        /* Mobile optimization */
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            
+            .video-player-container {
+                border-radius: 8px;
+                max-width: 100%;
+            }
+            
+            .watermark {
+                font-size: 12px;
+                top: 8px;
+                left: 8px;
+                padding: 3px 6px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding: 5px;
+            }
+            
+            .video-player-container {
+                border-radius: 5px;
+            }
+            
+            .watermark {
+                font-size: 11px;
+                top: 6px;
+                left: 6px;
+                padding: 2px 5px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="video-player-container">
+        <!-- Watermark element -->
+        <div class="watermark">Md Anis Gazi</div>
+        
+        <media-theme-yt>
+            <videojs-video
+                slot="media"
+                src="https://muc200.myluck1.top:8088/live/webcricn02/playlist.m3u8?id=115656&pk=1fd32e02403475213644684e2dcaa23c4c48d7d5612fdc03bbae56af91db8dcb3f2748f2b4be25ee51894ef7d9e5ef503fbb52bb8bd488bbdf6969f4317d9aed "
+                poster="https://res.cloudinary.com/dlklqihg6/image/upload/v1757750121/jtouxqgnwgpfaohavbye.jpg"
+                playsinline
+                crossorigin="anonymous"
+                controls
+                preload="auto"
+            >
+                <!-- Subtitles Tracks -->
+                <track kind="subtitles" src="https://example.com/subtitles/en.vtt" srclang="en" label="English" default>
+                <track kind="subtitles" src="https://example.com/subtitles/bn.vtt" srclang="bn" label="বাংলা (Bangla)">
+                <track kind="subtitles" src="https://example.com/subtitles/es.vtt" srclang="es" label="Español (Spanish)">
+                <track kind="subtitles" src="https://example.com/subtitles/ar.vtt" srclang="ar" label="العربية (Arabic)">
+                <track kind="subtitles" src="https://example.com/subtitles/zh.vtt" srclang="zh" label="中文 (Chinese)">
+                <track kind="subtitles" src="https://example.com/subtitles/hi.vtt" srclang="hi" label="हिन्दी (Hindi)">
+            </videojs-video>
+        </media-theme-yt>
+    </div>
+</body>
+</html>
